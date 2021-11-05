@@ -1,7 +1,7 @@
 {
   "name": "esyon/crawlerblock",
   "description": "This module blocks all kind of bots / crawlers / spiders.",
-  "type": "esyon-module",
+  "type": "oxideshop-module",
   "keywords": [
     "esyon",
     "oxid",
@@ -21,6 +21,11 @@
     "php": ">=8.0",
     "oxid-esales/oxideshop-ee": "v6.6.0",
     "jaybizzle/crawler-detect": "^v1.2.108"
+  },
+  "extra": {
+    "oxideshop": {
+      "target-directory": "esy/crawlerblock"
+    }
   },
   "autoload": {
     "psr-4": {
