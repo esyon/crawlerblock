@@ -42,6 +42,6 @@ class ShopControl extends ShopControl_parent
             }
         }
 
-        parent::start($sClass, $sFunction, $aParams, $aParams);
+        parent::start($sClass, $sFunction, $aParams, $aParams, $aViewsChain);
     }
 }
