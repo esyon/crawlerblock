@@ -3,10 +3,12 @@
   "description": "This module blocks all kind of bots / crawlers / spiders.",
   "type": "esyon-module",
   "keywords": [
+    "esyon",
     "oxid",
     "modules",
     "eShop",
     "crawler",
+    "detection",
     "block"
   ],
   "homepage": "https://www.esyon.de",
