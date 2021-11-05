@@ -1,0 +1,28 @@
+{
+  "name": "esyon/crawlerblock",
+  "description": "This module blocks all kind of bots / crawlers / spiders.",
+  "type": "esyon-module",
+  "keywords": [
+    "oxid",
+    "modules",
+    "eShop",
+    "crawler",
+    "block"
+  ],
+  "homepage": "https://www.esyon.de",
+  "version": "1.0.0",
+  "license": [
+    "GPL-3.0-only",
+    "proprietary"
+  ],
+  "require": {
+    "php": ">=8.0",
+    "oxid-esales/oxideshop-ee": "v6.6.0",
+    "jaybizzle/crawler-detect": "^v1.2.108"
+  },
+  "autoload": {
+    "psr-4": {
+      "Esyon\\CrawlerBlock\\": "../../../source/modules/esy/crawlerblock"
+    }
+  }
+}
