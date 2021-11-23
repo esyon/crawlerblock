@@ -36,8 +36,8 @@ class ShopControl extends ShopControl_parent
     public function start($sClass = null, $sFunction = null, $aParams = null, $aViewsChain = null)
     {
         if (!$this->isAdmin()) {
-            $CrawlerDetect = new CrawlerDetect();
-            if ($CrawlerDetect->isCrawler()) {
+            $crawlerDetect = new CrawlerDetect();
+            if ($crawlerDetect->isCrawler() === true) {
                 Registry::getUtils()->showMessageAndExit('');
             }
         }
