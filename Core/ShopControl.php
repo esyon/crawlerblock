@@ -25,6 +25,25 @@ use OxidEsales\Eshop\Core\Registry;
 class ShopControl extends ShopControl_parent
 {
     /**
+     * @return bool
+     */
+    private function isUserAgentWhiteListed(): bool
+    {
+        $userAgentWhiteList = Registry::getConfig()->getConfigParam('esyUserAgentWhiteList');
+        if (is_array($userAgentWhiteList) && count($userAgentWhiteList) > 0) {
+            $userAgent = strtolower(Registry::getUtilsServer()->getServerVar('HTTP_USER_AGENT'));
+            foreach ($userAgentWhiteList as $listUserAgent) {
+                $listUserAgent = strtolower($listUserAgent);
+                if (str_contains($userAgent, $listUserAgent)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * start
      *
      * @param  mixed $sClass
@@ -35,7 +54,7 @@ class ShopControl extends ShopControl_parent
      */
     public function start($sClass = null, $sFunction = null, $aParams = null, $aViewsChain = null)
     {
-        if (!$this->isAdmin()) {
+        if (!$this->isAdmin() && !$this->isUserAgentWhiteListed()) {
             $crawlerDetect = new CrawlerDetect();
             if ($crawlerDetect->isCrawler() === true) {
                 Registry::getUtils()->showMessageAndExit('');
