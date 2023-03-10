@@ -11,6 +11,8 @@
  * @link           http://www.esyon.de
  */
 
+use OxidEsales\Eshop\Core\ShopControl;
+
 $sMetadataVersion = '2.0';
 
 $aModule = [
@@ -29,6 +31,14 @@ $aModule = [
     'url' => 'https://www.esyon.de',
     'email' => 'support@esyon.de',
     'extend' => [
-        \OxidEsales\Eshop\Core\ShopControl::class => Esyon\CrawlerBlock\Core\ShopControl::class
-    ]
+        ShopControl::class => Esyon\CrawlerBlock\Core\ShopControl::class
+    ],
+    'settings' => [
+        [
+            'group' => 'ESYCrawlerBlockSettings',
+            'name' => 'esyUserAgentWhiteList',
+            'type' => 'arr',
+            'value' => [],
+        ],
+    ],
 ];
