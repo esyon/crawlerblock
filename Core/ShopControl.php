@@ -31,7 +31,7 @@ class ShopControl extends ShopControl_parent
     {
         $userAgentWhiteList = Registry::getConfig()->getConfigParam('esyUserAgentWhiteList');
         if (is_array($userAgentWhiteList) && count($userAgentWhiteList) > 0) {
-            $userAgent = strtolower(Registry::getUtilsServer()->getServerVar('HTTP_USER_AGENT'));
+            $userAgent = strtolower(Registry::getUtilsServer()->getServerVar('HTTP_USER_AGENT') ?? '');
             foreach ($userAgentWhiteList as $listUserAgent) {
                 $listUserAgent = strtolower($listUserAgent);
                 if (str_contains($userAgent, $listUserAgent)) {
