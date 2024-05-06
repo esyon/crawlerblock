@@ -8,7 +8,7 @@
  * @copyright      (C) ESYON GmbH
  * @since              Version 1.0
  * @author             Alexander Hirschfeld <support@esyon.de>
- * @link               http://www.esyon.de
+ * @link               https://www.esyon.de
  */
 
 declare(strict_types=1);
@@ -19,24 +19,58 @@ use Jaybizzle\CrawlerDetect\CrawlerDetect;
 use OxidEsales\Eshop\Core\Registry;
 
 /**
- * Class ViewConfig
- * @package Esyon\MultiBaskets\Core
+ *
  */
 class ShopControl extends ShopControl_parent
 {
     /**
+     * @var string
+     */
+    private const USER_AGENT_WHITE_LIST = 'esyUserAgentWhiteList';
+
+    /**
+     * @var string
+     */
+    private const USER_AGENT_BLACK_LIST = 'esyUserAgentBlackList';
+
+    /**
+     * @var string|null
+     */
+    private string|null $userAgent = null;
+
+    /**
+     * Get current user agent.
+     *
+     * @return string
+     */
+    private function getCurrentUserAgent(): string
+    {
+        if($this->userAgent === null) {
+            $this->userAgent = strtolower(
+                Registry::getUtilsServer()->getServerVar('HTTP_USER_AGENT') ?? ''
+            );
+        }
+
+        return $this->userAgent;
+    }
+
+    /**
+     * Check if user agent is listed in the given list.
+     *
+     * @param string $listName
      * @return bool
      */
-    private function isUserAgentWhiteListed(): bool
+    private function isUserAgentListed(string $listName): bool
     {
-        $userAgentWhiteList = Registry::getConfig()->getConfigParam('esyUserAgentWhiteList');
-        if (is_array($userAgentWhiteList) && count($userAgentWhiteList) > 0) {
-            $userAgent = strtolower(Registry::getUtilsServer()->getServerVar('HTTP_USER_AGENT') ?? '');
-            foreach ($userAgentWhiteList as $listUserAgent) {
-                $listUserAgent = strtolower($listUserAgent);
-                if (str_contains($userAgent, $listUserAgent)) {
-                    return true;
-                }
+        $userAgentList = Registry::getConfig()->getConfigParam($listName) ?? [];
+        if (empty($userAgentList)) {
+            return false;
+        }
+
+        $userAgent = $this->getCurrentUserAgent();
+        foreach ($userAgentList as $listUserAgent) {
+            if (str_contains($userAgent, strtolower($listUserAgent))) {
+                return true;
             }
         }
 
@@ -44,20 +78,35 @@ class ShopControl extends ShopControl_parent
     }
 
     /**
-     * start
+     * Block request.
      *
-     * @param  mixed $sClass
-     * @param  mixed $sFunction
-     * @param  mixed $aParams
-     * @param  mixed $aViewsChain
+     * @return void
+     */
+    private function blockRequest(): void
+    {
+        http_response_code(403);
+        Registry::getUtils()->showMessageAndExit('');
+    }
+
+    /**
+     * @param $sClass
+     * @param $sFunction
+     * @param $aParams
+     * @param $aViewsChain
      * @return void
      */
     public function start($sClass = null, $sFunction = null, $aParams = null, $aViewsChain = null)
     {
-        if (!$this->isAdmin() && !$this->isUserAgentWhiteListed()) {
-            $crawlerDetect = new CrawlerDetect();
-            if ($crawlerDetect->isCrawler() === true) {
-                Registry::getUtils()->showMessageAndExit('');
+        if (!$this->isAdmin()) {
+            if ($this->isUserAgentListed(self::USER_AGENT_BLACK_LIST)) {
+                $this->blockRequest();
+            }
+
+            if (!$this->isUserAgentListed(self::USER_AGENT_WHITE_LIST)) {
+                $crawlerDetect = new CrawlerDetect();
+                if ($crawlerDetect->isCrawler()) {
+                    $this->blockRequest();
+                }
             }
         }
 

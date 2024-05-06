@@ -8,12 +8,12 @@
  * @copyright      (C) ESYON GmbH
  * @since          Version 1.0
  * @author         Alexander Hirschfeld <support@esyon.de>
- * @link           http://www.esyon.de
+ * @link           https://www.esyon.de
  */
 
 use OxidEsales\Eshop\Core\ShopControl;
 
-$sMetadataVersion = '2.0';
+$sMetadataVersion = '2.1';
 
 $aModule = [
     'id' => 'esy/crawlerblock',
@@ -37,6 +37,12 @@ $aModule = [
         [
             'group' => 'ESYCrawlerBlockSettings',
             'name' => 'esyUserAgentWhiteList',
+            'type' => 'arr',
+            'value' => [],
+        ],
+        [
+            'group' => 'ESYCrawlerBlockSettings',
+            'name' => 'esyUserAgentBlackList',
             'type' => 'arr',
             'value' => [],
         ],

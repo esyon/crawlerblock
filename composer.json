@@ -20,7 +20,7 @@
   "require": {
     "php": ">=8.0",
     "oxid-esales/oxideshop-ee": "^v6.6.0",
-    "jaybizzle/crawler-detect": "^v1.2.115"
+    "jaybizzle/crawler-detect": "^v1.2.118"
   },
   "extra": {
     "oxideshop": {
