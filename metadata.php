@@ -46,5 +46,11 @@ $aModule = [
             'type' => 'arr',
             'value' => [],
         ],
+        [
+            'group' => 'ESYCrawlerBlockSettings',
+            'name' => 'esyBlockOnlyBlackListed',
+            'type' => 'bool',
+            'value' => false,
+        ],
     ],
 ];
