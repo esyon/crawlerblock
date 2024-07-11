@@ -34,6 +34,12 @@ class ShopControl extends ShopControl_parent
     private const USER_AGENT_BLACK_LIST = 'esyUserAgentBlackList';
 
     /**
+     * @var boolean
+     */
+    private const BLOCK_ONLY_BLOCKLIST = 'esyBlockOnlyBlackListed';
+
+
+    /**
      * @var string|null
      */
     private string|null $userAgent = null;
@@ -100,6 +106,10 @@ class ShopControl extends ShopControl_parent
         if (!$this->isAdmin()) {
             if ($this->isUserAgentListed(self::USER_AGENT_BLACK_LIST)) {
                 $this->blockRequest();
+            }
+
+            if(Registry::getConfig()->getConfigParam(self::BLOCK_ONLY_BLOCKLIST) === true) {
+                return;
             }
 
             if (!$this->isUserAgentListed(self::USER_AGENT_WHITE_LIST)) {
