@@ -18,5 +18,6 @@ $aLang = [
     'HELP_SHOP_MODULE_esyUserAgentWhiteList' => 'Auch ein Teil des User-Agents kann hier angegeben werden.',
     'SHOP_MODULE_esyUserAgentBlackList' => 'Gesperrte User-Agents',
     'HELP_SHOP_MODULE_esyUserAgentBlackList' => 'Auch ein Teil des User-Agents kann hier angegeben werden.',
-    'SHOP_MODULE_esyBlockOnlyBlackListed' => 'Nur Bearbeiter aus der Blockliste sperren.',
+    'SHOP_MODULE_esyBlockOnlyBlackListed' => 'Nur User-Agents aus der Blockliste sperren.',
+    'HELP_SHOP_MODULE_esyBlockOnlyBlackListed' => 'Wenn diese Option aktiviert ist, wird die Whitelist nicht berücksichtigt.',
 ];
