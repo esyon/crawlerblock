@@ -36,7 +36,7 @@ class ShopControl extends ShopControl_parent
     /**
      * @var boolean
      */
-    private const BLOCK_ONLY_BLOCKLIST = 'esyBlockOnlyBlackListed';
+    private const BLOCK_ONLY_BLACKLIST = 'esyBlockOnlyBlackListed';
 
 
     /**
@@ -108,7 +108,8 @@ class ShopControl extends ShopControl_parent
                 $this->blockRequest();
             }
 
-            if(Registry::getConfig()->getConfigParam(self::BLOCK_ONLY_BLOCKLIST) === true) {
+            if (Registry::getConfig()->getConfigParam(self::BLOCK_ONLY_BLACKLIST) === true) {
+                parent::start($sClass, $sFunction, $aParams, $aParams, $aViewsChain);
                 return;
             }
 
