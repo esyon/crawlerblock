@@ -48,7 +48,7 @@ $aModule = [
         ],
         [
             'group' => 'ESYCrawlerBlockSettings',
-            'name' => 'esyBlockOnlyBlackListed',
+            'name' => 'isCrawlerDetectionDisabled',
             'type' => 'bool',
             'value' => false,
         ],
