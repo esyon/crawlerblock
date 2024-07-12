@@ -18,6 +18,6 @@ $aLang = [
     'HELP_SHOP_MODULE_esyUserAgentWhiteList' => 'Auch ein Teil des User-Agents kann hier angegeben werden.',
     'SHOP_MODULE_esyUserAgentBlackList' => 'Gesperrte User-Agents',
     'HELP_SHOP_MODULE_esyUserAgentBlackList' => 'Auch ein Teil des User-Agents kann hier angegeben werden.',
-    'SHOP_MODULE_esyBlockOnlyBlackListed' => 'Nur User-Agents aus der Blockliste sperren.',
-    'HELP_SHOP_MODULE_esyBlockOnlyBlackListed' => 'Wenn diese Option aktiviert ist, wird die Whitelist nicht berücksichtigt.',
+    'SHOP_MODULE_isCrawlerDetectionDisabled' => 'Crawler-Erkennung deaktivieren.',
+    'HELP_SHOP_MODULE_isCrawlerDetectionDisabled' => 'Wenn diese Option aktiviert ist, werden nur die aufgelisteten User Agents berücksichtigt.',
 ];
