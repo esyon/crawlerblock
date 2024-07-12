@@ -36,7 +36,7 @@ class ShopControl extends ShopControl_parent
     /**
      * @var boolean
      */
-    private const BLOCK_ONLY_BLACKLIST = 'esyBlockOnlyBlackListed';
+    private const IS_CRAWLER_DETECTION_DISABLED = 'isCrawlerDetectionDisabled';
 
 
     /**
@@ -108,12 +108,8 @@ class ShopControl extends ShopControl_parent
                 $this->blockRequest();
             }
 
-            if (Registry::getConfig()->getConfigParam(self::BLOCK_ONLY_BLACKLIST) === true) {
-                parent::start($sClass, $sFunction, $aParams, $aParams, $aViewsChain);
-                return;
-            }
-
-            if (!$this->isUserAgentListed(self::USER_AGENT_WHITE_LIST)) {
+            if (!$this->isUserAgentListed(self::USER_AGENT_WHITE_LIST) &&
+               Registry::getConfig()->getConfigParam(self::IS_CRAWLER_DETECTION_DISABLED) === false) {
                 $crawlerDetect = new CrawlerDetect();
                 if ($crawlerDetect->isCrawler()) {
                     $this->blockRequest();
