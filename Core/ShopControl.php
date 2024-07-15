@@ -34,6 +34,12 @@ class ShopControl extends ShopControl_parent
     private const USER_AGENT_BLACK_LIST = 'esyUserAgentBlackList';
 
     /**
+     * @var boolean
+     */
+    private const IS_CRAWLER_DETECTION_DISABLED = 'isCrawlerDetectionDisabled';
+
+
+    /**
      * @var string|null
      */
     private string|null $userAgent = null;
@@ -89,6 +95,16 @@ class ShopControl extends ShopControl_parent
     }
 
     /**
+     * Check if disable crawler detection option is enabled.
+     *
+     * @return bool
+     */
+    private function isCrawlerDetectionEnabled(): bool
+    {
+        return Registry::getConfig()->getConfigParam(self::IS_CRAWLER_DETECTION_DISABLED) === false;
+    }
+    
+    /**
      * @param $sClass
      * @param $sFunction
      * @param $aParams
@@ -102,7 +118,7 @@ class ShopControl extends ShopControl_parent
                 $this->blockRequest();
             }
 
-            if (!$this->isUserAgentListed(self::USER_AGENT_WHITE_LIST)) {
+            if (!$this->isUserAgentListed(self::USER_AGENT_WHITE_LIST) && $this->isCrawlerDetectionEnabled() === true) {
                 $crawlerDetect = new CrawlerDetect();
                 if ($crawlerDetect->isCrawler()) {
                     $this->blockRequest();

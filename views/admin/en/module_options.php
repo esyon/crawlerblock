@@ -18,4 +18,6 @@ $aLang = [
     'HELP_SHOP_MODULE_esyUserAgentWhiteList' => 'A part of the User-Agent can also be specified here.',
     'SHOP_MODULE_esyUserAgentBlackList' => 'Blocked User-Agents',
     'HELP_SHOP_MODULE_esyUserAgentBlackList' => 'A part of the User-Agent can also be specified here.',
+    'SHOP_MODULE_isCrawlerDetectionDisabled' => 'Disable crawler detection',
+    'HELP_SHOP_MODULE_isCrawlerDetectionDisabled' => 'If this option is enabled, only the listed User-Agents are taken into account',
 ];
