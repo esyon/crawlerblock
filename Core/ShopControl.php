@@ -94,6 +94,18 @@ class ShopControl extends ShopControl_parent
         Registry::getUtils()->showMessageAndExit('');
     }
 
+
+    /**
+     * Check if disable crawler detection option is enabled.
+     *
+     * @return bool
+     */
+    private function isCrawlerDetectionEnabled(): bool
+    {
+        return Registry::getConfig()->getConfigParam(self::IS_CRAWLER_DETECTION_DISABLED) === false;
+    }
+
+    
     /**
      * @param $sClass
      * @param $sFunction
@@ -108,8 +120,7 @@ class ShopControl extends ShopControl_parent
                 $this->blockRequest();
             }
 
-            if (!$this->isUserAgentListed(self::USER_AGENT_WHITE_LIST) &&
-               Registry::getConfig()->getConfigParam(self::IS_CRAWLER_DETECTION_DISABLED) === false) {
+            if (!$this->isUserAgentListed(self::USER_AGENT_WHITE_LIST) && isCrawlerDetectionEnabled() === true) {
                 $crawlerDetect = new CrawlerDetect();
                 if ($crawlerDetect->isCrawler()) {
                     $this->blockRequest();
