@@ -26,7 +26,7 @@ $aModule = [
         'en' => 'Modul blocks all kind of bots / crawlers / spiders.',
     ],
     'thumbnail' => 'module.png',
-    'version' => '1.0.7',
+    'version' => '1.0.8',
     'author' => 'ESYON GmbH',
     'url' => 'https://www.esyon.de',
     'email' => 'support@esyon.de',
